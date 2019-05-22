@@ -32,6 +32,9 @@
 // picotts
 #include "picotts/cached_files_map.h"
 
+// DEFAULT CONFIGURATION
+#define DEFAULT_LANGUAGE    "es"
+#define DEFAULT_ENGINE      "pico"
 
 enum Engine {
   ENGINE_ATandT,
@@ -48,7 +51,7 @@ enum Engine {
 
 std::string _scripts_folder = ros::package::getPath("picotts") + "/scripts";
 Engine _engine;
-utils::Language _language = "en";
+utils::Language _language = DEFAULT_LANGUAGE;
 std::vector<std::string> _versions;
 // ENGINE_ATandT
 static const std::string TMP_AT_FILE = "/tmp/picotts_at.amr";
@@ -395,7 +398,7 @@ int main (int argc, char** argv) {
   ros::init(argc, argv, "picotts"); //Initialise and create a ROS node
   ros::NodeHandle nh_public, nh_private("~");
   // get params
-  std::string engine_str = "pico";
+  std::string engine_str = DEFAULT_ENGINE;
   nh_public.param("language", _language, _language);
   nh_private.param("engine", engine_str, engine_str);
   nh_private.param("ivona_credentials", _ivona_credentials, _ivona_credentials);
